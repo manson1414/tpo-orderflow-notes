@@ -2,7 +2,7 @@
 
 **目标**：掌握四个"不那么常用但同样有价值"的工具。
 
-> 前置：`13_衍生品数据_上_OT_CVD_Funding_Depth.md`（OI、CVD、Funding、Orderbook Depth）
+> 前置：`12_衍生品数据_上_OT_CVD_Funding_Depth.md`（OI、CVD、Funding、Orderbook Depth）
 
 ---
 

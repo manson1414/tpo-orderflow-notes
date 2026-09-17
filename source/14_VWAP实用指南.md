@@ -18,7 +18,7 @@
 
 ## 二、VWAP vs SMA vs EMA
 
-**对比**：VWAP（发光）vs SMA（红色）vs EMA（绿色，回看 26 根 K 线）
+**对比**：VWAP（成交量加权）vs SMA（简单均线）vs EMA（指数均线，回看 26 根 K 线）
 
 **观察结论**：
 - **VWAP 往往更"黏"着价格走**
