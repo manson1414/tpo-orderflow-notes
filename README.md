@@ -65,11 +65,12 @@
 
 ```bash
 python _build/_build_site.py      # 构建 + 同步 index.html 与 source/*.md
-python _build/_verify_all.py      # 四项校验，任一失败返回非 0
+python _build/_verify_all.py      # 五项校验，任一失败返回非 0
 ```
 
 校验覆盖：占位符残留 / id 唯一与锚点可达 / 跨文件重复长句 / SVG 溢出 / 侧栏分区、
-实图分布（34 张是否全部落地、有无重复引用或孤儿图）、章节指针（`xx.md` §N 是否真实存在）、小节编号错位。
+实图分布（34 张是否全部落地、有无重复引用或孤儿图）、章节指针（`xx.md` §N 是否真实存在）、
+小节编号错位、Markdown 渲染语义（浅缩进嵌套 / 列表被吞进段落）。
 
 ---
 

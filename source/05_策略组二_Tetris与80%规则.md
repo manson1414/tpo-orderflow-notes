@@ -52,6 +52,7 @@
 ### 3. 核心操作：合并 Profile
 
 > **操作步骤**：
+>
 > 1. 右键选中一个 profile
 > 2. 选择 **"Merge with previous profile section"（与前一个 profile 合并）**
 > 3. 点按钮
