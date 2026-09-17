@@ -1,0 +1,3 @@
+# 保持文件按原字节存取，禁止 CRLF 转换
+# 这样 push 上去的 index.html 与本地完全一致（可用 sha1 校验）
+* -text
