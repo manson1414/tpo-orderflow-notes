@@ -3,6 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+/* ═══ 打开时一律从顶部开始 ═══
+   实测（`_build/_scroll_probe.py`，headless Chrome 逐种打开方式量 scrollY）：
+     ① 全新打开、无 hash            → 0     ✅
+     ② 滚到深处按 F5                → 恢复原位置 ❌  ← 就是这里
+     ③ 重新导航到同一 URL           → 0     ✅
+     ④ 打开 `…#c01`                 → 9015  （锚点，符合预期）
+   ② 是浏览器的**滚动恢复**（`history.scrollRestoration` 默认 `auto`）：
+   刷新/重开标签时把上次的位置还给你。用户报的「打开不在顶部」就是这个。
+
+   关掉它，并在**没有 hash** 时强制回顶部。
+   ⚠️ 有 hash 时不回顶部 —— 那是用户点侧栏或分享链接的锚点，跳过去是对的。
+   ⚠️ 站内点侧栏是**同页 hash 跳转**（不触发 load），所以这个处理不会打断它。 */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+addEventListener('load', function () {
+  if (!location.hash) scrollTo(0, 0);
+});
+</script>
 <title>TPO / Market Profile + 订单流 + 衍生品 + VWAP 学习路径与知识库</title>
 <style>
 /* ═══════════════════════════════════════════════════════════════════════
@@ -393,10 +411,6 @@ figure.fig-wrap.live figcaption .cn{background:var(--lime)}
 .om-note b{color:var(--cyan)}
 .om-note.warn{border-left-color:var(--orange)}
 .om-note.warn b{color:var(--orange)}
-/* 全站公告：挂在 <main> 顶部，**不属于任何一张图** —— 所以不带负上边距
-   （`.om-note` 的 -14px 是为了抵消 figure 与说明块之间的空隙，公告上面没有 figure）。 */
-.om-note.notice{margin:0 0 26px; border-left-color:var(--lime)}
-.om-note.notice b{color:var(--lime)}
 .om-note code{background:#0b0e13; border:1.5px solid var(--line); border-radius:6px;
   padding:1px 6px; font-family:var(--mono); font-size:11.5px; color:var(--lime)}
 @media (max-width:560px){
@@ -429,7 +443,6 @@ figure.fig-wrap.live figcaption .cn{background:var(--lime)}
 </aside>
 
 <main id="main">
-<div class="om-note notice"><b>下面共 8 张图是真实数据的快照，不是示意图，但也不是实时行情。</b><br>标的 <b>ETHUSDT</b>（永续），K 线一律 <b>5 分钟</b>，数据来自 OpenMarket API，在<b>构建这一页的时候</b>取一次、内联进 HTML，所以它是一份<b>快照</b>：<b>数据截止 09-19 13:25 GMT+8</b>。断网也能看，但不会自己更新。<br><b>时间口径：</b>除订单簿热力图外，所有图共用一个 session 划分 —— <b>GMT+8 08:00 开盘</b>（= UTC 00:00），每场开盘重置，所以它们能互相印证。<br><b>唯一的例外是订单簿热力图</b>（第 10 章那张挂单密度图）：它要一整天才有意义，用的是<b>滚动 24 小时</b>的整点快照，横轴一格 = 1 小时 —— 它和别的图<b>不能</b>按同一根 K 线对齐，只能按价格水平对读。<br><b>交互：</b>拖拽左右平移 · 滚轮以光标为锚点缩放 · 双击复位 · 悬停读该根的值。<b>注意</b>：光标停在图上时滚轮会缩放图表、不再滚动页面，想继续往下读就把光标移开再滚。</div>
 <section class="chapter sec-learn" id="learn"><header class="ch-hero"><span class="ch-chip">学习路径</span><h1 class="chapter-title">入口 · 阅读顺序</h1></header><div class="ch-body">
 <h2 id="一-阅读顺序" class="hc1"><span class="h2n">§一</span>阅读顺序<a class="anchor" href="#一-阅读顺序">#</a></h2>
 <div class="tbl"><table>
